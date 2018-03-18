@@ -11,6 +11,7 @@ import time
 site = urllib.request.urlopen("https://www.nationstates.net/region=doll_guldur")
 html = str(site.read())
 nation_count = int(html.split('<a href="region=doll_guldur/page=list_nations">')[1].split(' nations')[0]) #amount of nations in the region
+time.sleep(6) #NS rules
 
 raw_nations = []
 for page in range(0, math.ceil(nation_count/10)):

@@ -11,14 +11,14 @@ import time
 site = urllib.request.urlopen("https://www.nationstates.net/region=doll_guldur")
 html = str(site.read())
 nation_count = int(html.split('<a href="region=doll_guldur/page=list_nations">')[1].split(' nations')[0]) #amount of nations in the region
-time.sleep(6) #NS rules
+time.sleep(.6) #NS rules
 
 raw_nations = []
 for page in range(0, math.ceil(nation_count/10)):
     link = "https://www.nationstates.net/page=list_nations/region=doll_guldur/censusid=80?start=" + str(page*10)
     site = urllib.request.urlopen(link)
     html = str(site.read())
-    time.sleep(6) #to comply with NS rules
+    time.sleep(.6) #to comply with NS rules
     for x in html.split('nation='):
         raw_nations.append(x.split('"')[0]) #adds nation links to the list
     print("Page " + str(page+1) + " of " + str(math.ceil(nation_count/10)) + " scanned")

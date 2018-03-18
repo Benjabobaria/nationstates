@@ -7,6 +7,7 @@ import urllib.request
 from urllib.error import HTTPError
 import math
 import time
+import random
 
 site = urllib.request.urlopen("https://www.nationstates.net/cgi-bin/api.cgi?region=doll_guldur")
 html = str(site.read())
@@ -14,6 +15,19 @@ nation_count = int(html.split('<NUMNATIONS>')[1].split('</NUMNATIONS>')[0]) #amo
 nation_list = html.split('<NATIONS>')[1].split('</NATIONS>')[0].split(':')
 time.sleep(.6) #NS rules
 print('Nation list completed!\n')
+
+#time-saving segment
+iterate_choice = ''
+while iterate_choice not in ['y', 'n']:
+    iterate_choice = input('Not searching every nation would save a lot of time. Would you like search every nation? (y/n) > ')
+if iterate_choice == 'y':
+    pass
+if iterate_choice == 'n':
+    nations_to_search = ''
+    while not nations_to_search.isdigit():
+        nations_to_search = input("There are " + str(nation_count) + " nations in Doll Guldur. How many do you wish to search? Keep in mind, less nations means less accuracy. > ")
+    random.shuffle(nation_list)
+    nation_list = nation_list[0:int(nations_to_search)]
 
 #This section of the program gets all the update times available for each nation. This process will take a long time.
 update_times = []
@@ -28,7 +42,7 @@ for x in range(0, len(nation_list)):
         if len(nationhtml.split('influence in Doll Guldur')) > 1:
             for y in range(1, len(nationhtml.split('influence in Doll Guldur'))):
                 update_times.append(nationhtml.split('influence in Doll Guldur')[y].split('<pubDate>')[1].split('</pubDate>')[0]) #update time as a string
-        print('Nation ' + str(x+1) + ' out of ' + str(nation_count) + ' - success')
+        print('Nation ' + str(x+1) + ' out of ' + str(len(nation_list)) + ' - success')
         time.sleep(.6) #to comply with NS rules
 
 def seconds_since_2000(update): #finds seconds since since 2000 for an update, used to find the last nation of the most recent update in the region

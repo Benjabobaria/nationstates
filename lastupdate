@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+
+#This program calibrates Derpseh's Spyglass program, which can be found at https://github.com/Derpseh/Spyglass
+#Place this in your Spyglass-master/Source folder
+
 import urllib.request
 from urllib.error import HTTPError
 import math

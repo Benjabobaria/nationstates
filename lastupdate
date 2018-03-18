@@ -13,6 +13,7 @@ html = str(site.read())
 nation_count = int(html.split('<NUMNATIONS>')[1].split('</NUMNATIONS>')[0]) #amount of nations in the region
 nation_list = html.split('<NATIONS>')[1].split('</NATIONS>')[0].split(':')
 time.sleep(.6) #NS rules
+print('Nation list completed!\n')
 
 #This section of the program gets all the update times available for each nation. This process will take a long time.
 update_times = []
